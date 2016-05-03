@@ -44,3 +44,18 @@
 .profile-img-card {
 	margin: 0 auto;
 }
+
+h3 {
+	margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0.67em;
+    margin-right: 0.67em;
+    font-weight: bold;
+}
+
+.ad_corp_list_button{
+	font-size:12px;
+	padding:3px 12px;
+	font-weight: 510;
+	height:25px;
+}
