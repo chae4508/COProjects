@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.autoad.app.dao.UserDAO;
+import com.autoad.app.vo.LoginVO;
 
 /**
  * @author calif74
@@ -24,5 +25,9 @@ public class UserService {
 	
 	public int getUserCnt(){
 		return userDAO.getUserCnt();
+	}
+	
+	public LoginVO canLogin(LoginVO login){
+		return userDAO.canLogin(login);
 	}
 }

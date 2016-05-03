@@ -19,7 +19,15 @@ public class AbstractDAO {
 	protected void printQueryId(String queryId) {
 		if (log.isDebugEnabled()) {
 			log.debug("\t QueryId  \t:  " + queryId);
+			log.debug("sql : \n" + sqlSession.getSqlSessionFactory().getConfiguration()
+					.getMappedStatement(queryId, false).getBoundSql(null).getSql());
 		}
+	}
+
+	protected void printQueryId(String queryId, Object params) {
+		log.debug("\t QueryId  \t:  " + queryId);
+		log.debug("sql : \n" + sqlSession.getSqlSessionFactory().getConfiguration().getMappedStatement(queryId)
+				.getBoundSql(params).getSql());
 	}
 
 	public Object insert(String queryId, Object params) {
@@ -43,8 +51,15 @@ public class AbstractDAO {
 	}
 
 	public Object selectOne(String queryId, Object params) {
-		printQueryId(queryId);
-		return sqlSession.selectOne(queryId, params);
+		try {
+			printQueryId(queryId, params);
+			Object result = sqlSession.selectOne(queryId, params);
+			printQueryId(queryId, params);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -55,7 +70,7 @@ public class AbstractDAO {
 
 	@SuppressWarnings("rawtypes")
 	public List selectList(String queryId, Object params) {
-		printQueryId(queryId);
+		printQueryId(queryId,params);
 		return sqlSession.selectList(queryId, params);
 	}
 }

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.autoad.app.common.db.AbstractDAO;
+import com.autoad.app.vo.LoginVO;
 
 /**
  * @author calif74
@@ -20,4 +21,17 @@ public class UserDAO extends AbstractDAO {
     public int getUserCnt(){
     	return (Integer)selectOne("userDAO.getUserListCount");
     }	
+    
+    public LoginVO canLogin(LoginVO login){
+    	LoginVO rtnVal = new LoginVO();
+    	
+    	try{
+    		rtnVal = (LoginVO)selectOne("userDAO.canLogin",login);
+    		logger.debug("rtnVal : " + rtnVal.toString());
+        	//rtnVal = (LoginVO)selectList("userDAO.canLogin",login);
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+    	return rtnVal;
+    }
 }

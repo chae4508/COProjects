@@ -23,7 +23,12 @@ public class URIInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		request.setAttribute("menuList", Menu.getMenuList(request.getRequestURI()));
+		String requestURI = request.getRequestURI();
+		System.out.println("requestURI : " + requestURI);
+		if(!requestURI.startsWith("/app/login")){
+			request.setAttribute("menuList", Menu.getMenuList(requestURI));
+		}
+		
 		return super.preHandle(request, response, handler);
 	}
 

@@ -8,5 +8,21 @@
               FROM USER_ACCOUNT
         ]]>
     </select>
-     
+    <select id="canLogin" parameterType="com.autoad.app.vo.LoginVO" resultType="com.autoad.app.vo.LoginVO">
+      <![CDATA[
+        SELECT CASE WHEN COUNT(1) > 0 AND SUM(PASSWD_CHK) = 1 THEN 1 
+		       ELSE 0 END AS CAN_LOGIN,
+		       CASE WHEN COUNT(1) = 0 THEN '該当のIDがありません。'
+		       ELSE
+		           CASE WHEN SUM(PASSWD_CHK) = 0 THEN 'Passwordが違います。' 
+		           ELSE 'ログインができます。' END
+			   END AS LOGIN_MSG
+		  FROM (SELECT USER_ID AS LOGIN_ID,
+					   USER_PW AS LOGIN_PWD,
+					   CASE WHEN USER_PW = PASSWORD(#{loginPwd}) THEN 1 ELSE 0 END PASSWD_CHK
+				  FROM USER_ACCOUNT
+				 WHERE USER_ID = #{loginId}
+				   AND DEL_FLG = '0') AS LOGIN_RESULT
+      ]]>
+    </select>
 </mapper>
