@@ -47,6 +47,11 @@
 			<beans:bean id="loggerInterceptor"
 				class="com.autoad.app.common.interceptor.LoggerInterceptor"></beans:bean>
 		</interceptor>
+		<interceptor>
+			<mapping path="/**" />
+			<beans:bean id="uriInterceptor"
+				class="com.autoad.app.common.interceptor.URIInterceptor"></beans:bean>
+		</interceptor>
 	</interceptors>
 
 	<beans:bean
