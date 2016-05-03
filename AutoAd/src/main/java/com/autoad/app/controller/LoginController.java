@@ -4,6 +4,8 @@
 package com.autoad.app.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,17 +30,25 @@ public class LoginController {
 	UserService userService;
 	
 	@RequestMapping(value="index.do")
-	public String index() throws Exception{
-		
+	public String index(String returnUrl,Model model) throws Exception{
+		if(returnUrl != null && !"".equals(returnUrl.trim())){
+			model.addAttribute("returnUrl",returnUrl);
+		}
 		return "login/index";
 	}
 	
 	@RequestMapping(value="/getLoginInfo.do")
 	@ResponseBody
-	public LoginVO getLoginInfo(LoginVO login,Model model) throws Exception{
+	public LoginVO getLoginInfo(LoginVO login,Model model,HttpServletRequest request) throws Exception{
 		LoginVO result = new LoginVO();
 		
 		result = userService.canLogin(login);
+		
+		if(result.getCanLogin() == 1){
+			HttpSession session = request.getSession(false);
+			session.setAttribute("loginInfo", result);
+		}
+		
 		return result;
 	}
 }

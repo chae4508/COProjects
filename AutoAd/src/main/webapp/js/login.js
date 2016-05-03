@@ -29,7 +29,16 @@ Login.prototype ={
 			type: 'post',
 			dataType: 'json',
 			success: function(data){
-				console.log('data : %o',data);
+				
+				if(data.canLogin == 0){
+					bootbox.alert(data.loginMsg);
+				}else{
+					if($("#returnUrl").val() == ''){
+						location.href='/app/management/manageUrl.do'
+					}else{
+						location.href = $("#returnUrl").val();
+					}
+				}
 			},
 			error: function(data){
 				console.log('data in error : %o',data);

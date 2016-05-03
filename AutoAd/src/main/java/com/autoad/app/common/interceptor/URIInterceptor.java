@@ -5,9 +5,10 @@ package com.autoad.app.common.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -18,17 +19,24 @@ import com.autoad.app.vo.common.Menu;
  *
  */
 public class URIInterceptor extends HandlerInterceptorAdapter {
-	protected Log log = LogFactory.getLog(LoggerInterceptor.class);
+	protected Logger logger = LoggerFactory.getLogger(LoggerInterceptor.class);
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String requestURI = request.getRequestURI();
-		System.out.println("requestURI : " + requestURI);
-		if(!requestURI.startsWith("/app/login")){
+
+		if (!requestURI.startsWith("/app/login")) {
 			request.setAttribute("menuList", Menu.getMenuList(requestURI));
+
+			HttpSession session = request.getSession(false);
+			if (session.getAttribute("loginInfo") == null) {
+				logger.debug("not loginned");
+				response.sendRedirect("/app/login/?returnUrl=" + requestURI);
+				return false;
+			}
 		}
-		
+
 		return super.preHandle(request, response, handler);
 	}
 

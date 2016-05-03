@@ -23,10 +23,11 @@
                 <input type="text" id="loginId" class="form-control" placeholder="Login ID" required autofocus>
                 <input type="password" id="loginPwd" class="form-control" placeholder="Password" required>
                 <div id="remember" class="checkbox">
-                    <label>
+                    <!-- <label>
                         <input type="checkbox" value="remember-me"> Remember me
-                    </label>
+                    </label> -->
                 </div>
+                <input type="hidden" id="returnUrl" value="${returnUrl}"/>
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="button" id="btnLogin">Sign in</button>
             </form><!-- /form -->
         </div><!-- /card-container -->
