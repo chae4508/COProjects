@@ -30,6 +30,7 @@ public class UserController {
 	@RequestMapping(value = "getUserCnt.do")
 	public String getUserCnt(Map<String, Object> commandMap, Model model) throws Exception {
 		model.addAttribute("userCnt", userService.getUserCnt());
-		return "user/getUserCnt";
+		//return "user/getUserCnt";
+		return "layout";
 	}
 }
