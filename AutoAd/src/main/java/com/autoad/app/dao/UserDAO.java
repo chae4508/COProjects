@@ -17,21 +17,19 @@ import com.autoad.app.vo.LoginVO;
 @Repository("userDAO")
 public class UserDAO extends AbstractDAO {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-    public int getUserCnt(){
-    	return (Integer)selectOne("userDAO.getUserListCount");
-    }	
-    
-    public LoginVO canLogin(LoginVO login){
-    	LoginVO rtnVal = new LoginVO();
-    	
-    	try{
-    		rtnVal = (LoginVO)selectOne("userDAO.canLogin",login);
-    		logger.debug("rtnVal : " + rtnVal.toString());
-        	//rtnVal = (LoginVO)selectList("userDAO.canLogin",login);
-    	}catch(Exception e){
-    		e.printStackTrace();
-    	}
-    	return rtnVal;
-    }
+
+	public int getUserCnt() {
+		return (Integer) selectOne("userDAO.getUserListCount");
+	}
+
+	public LoginVO canLogin(LoginVO login) {
+		try {
+			login = (LoginVO) selectOne("userDAO.canLogin", login);
+			logger.debug("rtnVal : " + login.toString());
+			// rtnVal = (LoginVO)selectList("userDAO.canLogin",login);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return login;
+	}
 }
