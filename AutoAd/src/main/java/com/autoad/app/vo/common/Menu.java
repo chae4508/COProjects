@@ -45,6 +45,7 @@ public class Menu {
 	}
 
 	public static List<Menu> getMenuList(String url){
+		System.out.print(url);
     	List<Menu> menuList = new LinkedList<Menu>();
     	
     	Menu menu = new Menu();

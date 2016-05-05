@@ -2,17 +2,53 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="advertiseDAO">
+     <select id="getMaxId" resultType="com.autoad.app.vo.AdCompListVO">
+     	   SELECT MAX(ID) + 1 AS MAXID
+     	     FROM AD_CORP
+     </select>
      <select id="getAdCompList" resultType="com.autoad.app.vo.AdCompListVO">
         <![CDATA[
-            SELECT ID AS id,
-                   AD_NM AS adNm,
-                   CREATE_USER AS createUser,
-                   CREATE_DT AS createDt,
-                   UPDATE_USER AS updateUser,
-                   UPDATE_DT AS updateDt,
-                   DEL_FLG AS delFlg
+            SELECT (SELECT COUNT(1) AS CNT
+          			  FROM AD_CORP
+       			   )AS TOTAL,
+            	   ID,
+                   AD_NM,
+                   CREATE_USER,
+                   CREATE_DT,
+                   UPDATE_USER,
+                   UPDATE_DT,
+                   DEL_FLG
               FROM AD_CORP
-            ORDER BY ID
+            ORDER BY ID DESC
         ]]>
     </select>
+    <insert id="regAdCompNm" parameterType="com.autoad.app.vo.AdCompListVO">
+    		INSERT INTO AD_CORP (
+    		       ID,
+    		       AD_NM,
+    		       CREATE_USER,
+    		       CREATE_DT,
+    		       DEL_FLG) VALUES(
+    		       #{id},
+    		       #{regAdCompNm},
+    		       'miraichae',
+    		       now(),
+    		       '0'
+    		       )
+    </insert>
+    <select id="modSelAdCompNm" resultType="com.autoad.app.vo.AdCompListVO">
+           SELECT *
+             FROM AD_CORP
+            WHERE ID = ${id}
+    </select>
+    <update id="modifyAdCompNm" parameterType="com.autoad.app.vo.AdCompListVO">
+    		UPDATE AD_CORP
+    		   SET AD_NM = #{adNm},
+    		       UPDATE_USER = 'miraichae',
+    		       UPDATE_DT = NOW()
+    		 WHERE ID = ${id}      
+    </update>
+    <delete id="delAdComp" parameterType="com.autoad.app.vo.AdCompListVO">
+    		DELETE FROM AD_CORP WHERE ID = ${id}
+    </delete>
 </mapper>

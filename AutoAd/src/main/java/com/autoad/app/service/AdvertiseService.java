@@ -30,4 +30,18 @@ public class AdvertiseService {
 		return advertiseDAO.getAdCompList();
 	}
 	
+	public String regAdComp(AdCompListVO adCompListVo){
+		return advertiseDAO.regAdCompNm(adCompListVo);
+	}
+	
+	public AdCompListVO modSelAdCompNm(AdCompListVO adCompListVo){
+		return advertiseDAO.modSelAdCompNm(adCompListVo);
+	}
+	
+	public String modifyAdComp(AdCompListVO adCompListVo){
+		return advertiseDAO.modifyAdComp(adCompListVo);
+	}
+	public String delAdComp(AdCompListVO adCompListVo){
+		return advertiseDAO.delAdComp(adCompListVo);
+	}
 }

@@ -10,4 +10,9 @@
    <put-attribute name="titleName" value="テスト" />
    <put-attribute name="body" value="/WEB-INF/views/user/getUserCnt.jsp" />
  </definition>
+ <definition name="advertise/adCompList" extends="baseLayout">
+   <put-attribute name="titleName" value="テスト" />
+   <put-attribute name="body" value="/WEB-INF/views/advertise/adCompList.jsp" />
+ </definition>
+ 
 </tiles-definitions>

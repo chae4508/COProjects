@@ -4,7 +4,7 @@
 package com.autoad.app.vo;
 
 public class AdCompListVO {
-	private String id;
+	private int id;
 	
 	private String adNm;
 	
@@ -17,16 +17,24 @@ public class AdCompListVO {
 	private String updateDt;
 	
 	private String delFlg;
+	
+	private String total;
+	
+	private String clickPageNo;
+	
+	private String regAdCompNm;
+	
+	private int maxId;
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	/**
@@ -100,6 +108,54 @@ public class AdCompListVO {
 	 */
 	public void setDelFlg(String delFlg) {
 		this.delFlg = delFlg;
+	}
+	/**
+	 * @return the total
+	 */
+	public String getTotal() {
+		return total;
+	}
+	/**
+	 * @param total the total to set
+	 */
+	public void setTotal(String total) {
+		this.total = total;
+	}
+	/**
+	 * @return the clickPageNo
+	 */
+	public String getClickPageNo() {
+		return clickPageNo;
+	}
+	/**
+	 * @param clickPageNo the clickPageNo to set
+	 */
+	public void setClickPageNo(String clickPageNo) {
+		this.clickPageNo = clickPageNo;
+	}
+	/**
+	 * @return the regAdCompNm
+	 */
+	public String getRegAdCompNm() {
+		return regAdCompNm;
+	}
+	/**
+	 * @param regAdCompNm the regAdCompNm to set
+	 */
+	public void setRegAdCompNm(String regAdCompNm) {
+		this.regAdCompNm = regAdCompNm;
+	}
+	/**
+	 * @return the maxId
+	 */
+	public int getMaxId() {
+		return maxId;
+	}
+	/**
+	 * @param maxId the maxId to set
+	 */
+	public void setMaxId(int maxId) {
+		this.maxId = maxId;
 	}
 	
 }
