@@ -1,3 +1,6 @@
+/*
+ * miraichae
+ */
 package com.autoad.app.vo;
 
 import java.util.ArrayList;
@@ -29,13 +32,15 @@ public class PagingCommon {
 	public HashMap<String, Object> pagingMake(String clickPageNo, String totalCount, List<AdCompListVO> adCorpList) {
 		HashMap<String, Object> resultMap = new LinkedHashMap();
 		HashMap<String, Integer> pageMap = new LinkedHashMap();
-
+		
 		// totalCount
 		this.totalCount = Integer.parseInt(totalCount);
 		pageMap.put("totalCount", this.totalCount);
 		// 一つのページあたり表示する掲示数
 		this.pageSize = 5;
 		pageMap.put("pageSize", this.pageSize);
+		//pageGroupSize
+		pageGroupSize = 5;
 		// ページ番号
 		if ("".equals(clickPageNo) || clickPageNo == null || "0".equals(clickPageNo)) {
 			currentPage = 1;
@@ -68,11 +73,15 @@ public class PagingCommon {
 		}
 		pageTotal = this.totalCount / pageSize + (this.totalCount % pageSize == 0 ? 0 : 1);
 		pageMap.put("pageTotal", pageTotal);
-		// startPage
-		startPage = 1;
+		//numPageGroup
+		this.numPageGroup = (int) Math.ceil((double)currentPage/pageGroupSize);
+		startPage = (numPageGroup - 1) * pageGroupSize + 1;
+		
 		pageMap.put("startPage", startPage);
-		// endPage
-		endPage = pageTotal;
+		endPage = startPage + pageGroupSize - 1;
+		if(endPage > pageTotal){
+			endPage = pageTotal;
+		}
 		pageMap.put("endPage", endPage);
 		
 		this.previewPage = currentPage - 1;

@@ -41,7 +41,7 @@
 					aria-label="Previous"> <span aria-hidden="true">&laquo; Previous</span></a></li>
 
 				<c:forEach var="i" begin="${pageInfo.pageMapParam.startPage}"
-					end="${pageInfo.pageMapParam.pageTotal}">
+					end="${pageInfo.pageMapParam.endPage}">
 					<li><a href="/app/advertise/adCompList.do?clickPageNo=${i}">${i}</a></li>
 				</c:forEach>
 
