@@ -16,7 +16,8 @@
 		       ELSE
 		           CASE WHEN SUM(PASSWD_CHK) = 0 THEN 'Passwordが違います。' 
 		           ELSE 'ログインができます。' END
-			   END AS LOGIN_MSG
+			   END AS LOGIN_MSG,
+			   MAX(LOGIN_ID) AS LOGIN_ID
 		  FROM (SELECT USER_ID AS LOGIN_ID,
 					   USER_PW AS LOGIN_PWD,
 					   CASE WHEN USER_PW = PASSWORD(#{loginPwd}) THEN 1 ELSE 0 END PASSWD_CHK
