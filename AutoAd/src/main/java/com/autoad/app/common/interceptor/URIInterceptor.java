@@ -26,7 +26,7 @@ public class URIInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		String requestURI = request.getRequestURI();
 
-		if (!requestURI.startsWith("/app/login")) {
+		if (!requestURI.startsWith("/app/login") && !requestURI.startsWith("/app/tags")) {
 			request.setAttribute("menuList", Menu.getMenuList(requestURI));
 
 			HttpSession session = request.getSession(false);
